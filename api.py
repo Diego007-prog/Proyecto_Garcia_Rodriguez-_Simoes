@@ -14,6 +14,8 @@ def api_departaments():
         departamento = Departamento(k["departmentId"], k["displayName"])
         departamentos.append(departamento)
 
+    return departamentos
+
 
 def api_obras():
     obras = []
@@ -27,7 +29,7 @@ def api_obras():
         url2 = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(k)
         #print(url2)
 
-
+"""
 api_departaments()
 api_obras()
 
@@ -36,4 +38,4 @@ data = requests.get(r)
 
 listado_id = data.json()
 
-print(listado_id)
+print(listado_id)"""

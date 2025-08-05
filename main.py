@@ -1,9 +1,10 @@
 from Museo import Museo
-from Api import Api
+from api import api_departaments
 
 def main():
-    manejador_api = Api()
-    museo = Museo (manejador_api)
+    departamentos = api_departaments()
+    #manejador_api = Api()
+    museo = Museo (departamentos)
     museo.start()
 
 main()
