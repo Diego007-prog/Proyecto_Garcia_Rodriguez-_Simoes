@@ -32,10 +32,14 @@ def api_obras():
 """
 api_departaments()
 api_obras()
+"""
 
-r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=1&q=*&hasImages=true"
-data = requests.get(r)
+def api_buscar_obras_por_departmento(id):
+    r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
+    data = requests.get(r)
 
-listado_id = data.json()
+    listado_id = data.json()
 
-print(listado_id)"""
+    print(listado_id)
+
+    return listado_id
