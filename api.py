@@ -72,6 +72,30 @@ def api_buscar_obras_por_nombre(nombre):
     return obras
 
 
+
+#Busca todas las obras del museo y devuelve una lista de objetos Obra
+def api_obras():
+    obras = []
+    url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+
+    data = requests.get(url)
+    try:
+        listado_id = data.json()
+    except requests.exceptions.JSONDecodeError:
+        return None
+
+    #recorre la lista de ids y busca cada obra por id
+    for i, id in enumerate(listado_id["objectIDs"]):
+        if i >= 100: 
+            break
+        obra = api_buscar_obras_por_id(id)
+        if obra is not None:
+            obras.append(obra)
+
+    return obras
+
+
+
 ######"""Fin funcion usadas hasta el momento"""
 
 
@@ -80,17 +104,7 @@ def api_buscar_obras_por_nombre(nombre):
 
 
 
-def api_obras():
-    obras = []
-    url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
 
-    data = requests.get(url)
-
-    listado_id = data.json()
-
-    for k in listado_id["objectIDs"]:
-        url2 = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(k)
-        #print(url2)
 
 """
 api_departaments()
