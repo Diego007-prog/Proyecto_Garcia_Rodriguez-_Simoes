@@ -2,7 +2,7 @@
 from Obra import Obra
 from Departamento import Departamento
 from Artista import Artista
-from api import api_buscar_obras_por_departmento, api_buscar_obras_por_nombre
+from api import api_buscar_obras_por_departmento, api_buscar_obras_por_nombre, api_buscar_obras_por_id
 
 
 
@@ -28,7 +28,14 @@ class Museo :
 
 
                 id = self.departamentos[int(opcion)-1].id_departamento
-                api_buscar_obras_por_departmento(id)
+                listado_id = api_buscar_obras_por_departmento(id)
+
+                for id in listado_id:
+                    obra = api_buscar_obras_por_id(id)
+                    if obra != None:
+                        obra.show()
+
+
                     
 
 

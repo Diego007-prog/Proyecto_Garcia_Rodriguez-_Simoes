@@ -20,5 +20,6 @@ class Obra:
         print (f"Tipo: {self.tipo}")
         print (f"Año de creación: {self.ano_creacion}")
         print (f"Imagen de la obra: {self.imagen_obra}")
+        print("\n")
 
          

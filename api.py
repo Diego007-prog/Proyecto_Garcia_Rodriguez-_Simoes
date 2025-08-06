@@ -1,6 +1,7 @@
 import pip._vendor.requests as requests
 
 from Departamento import Departamento
+from Obra import Obra
 
 def api_departaments():
     departamentos = []
@@ -38,11 +39,23 @@ def api_buscar_obras_por_departmento(id):
     r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
     data = requests.get(r)
 
-    listado_id = data.json()
+    listado_id = data.json()["objectIDs"]
 
-    print(listado_id)
+    #print(listado_id)
 
     return listado_id
+
+def api_buscar_obras_por_id(id):
+    r="https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(id)
+    data = requests.get(r)
+
+    try:
+        obra = data.json()
+    except requests.exceptions.JSONDecodeError:
+        #print(f"respuesta inválida para ID {id}")
+        return None
+    obra = Obra(obra["objectID"], obra["title"], obra["artistDisplayName"], obra["artistNationality"], obra["artistBeginDate"], obra["artistEndDate"], obra["classification"], obra["objectDate"], obra["primaryImageSmall"])
+    return obra
 
 
 def api_buscar_obras_por_nombre(nombre):
