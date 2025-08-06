@@ -58,16 +58,29 @@ def api_buscar_obras_por_id(id):
     except requests.exceptions.JSONDecodeError:
         #print(f"respuesta inválida para ID {id}")
         return None
-    obra = Obra(obra["objectID"], obra["title"], obra["artistDisplayName"], obra["artistNationality"], obra["artistBeginDate"], obra["artistEndDate"], obra["classification"], obra["objectDate"], obra["primaryImageSmall"])
-    return obra
+    
+    if 'message' in obra:
+        return None
+    else:
+        obra = Obra(obra["objectID"], obra["title"], obra["artistDisplayName"], obra["artistNationality"], obra["artistBeginDate"], obra["artistEndDate"], obra["classification"], obra["objectDate"], obra["primaryImageSmall"])
+        return obra
 
 
+#busca las obras por nombre del artista, y muestra las obras encontradas
 def api_buscar_obras_por_nombre(nombre):
     nombre_codificado = nombre.replace(" ", "%20").lower()
     #url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?q={nombre_codificado}&artistOrCulture=true&hasImages=true"
     url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q={nombre_codificado}"
     data = requests.get(url)
-    listado_id = data.json()
-    print(listado_id)
-    return listado_id
-
+    listado_id = data.json()["objectIDs"]
+    
+    #si no se encuentran obras, devuelve None y lo indica
+    if listado_id is None:
+        print("No se encontraron obras para el nombre ingresado.")
+    else:
+        for id in listado_id:
+            obra = api_buscar_obras_por_id(id)
+            if obra != None:
+                obra.show()
+        
+    
