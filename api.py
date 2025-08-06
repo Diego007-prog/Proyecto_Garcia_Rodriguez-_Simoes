@@ -3,6 +3,8 @@ import pip._vendor.requests as requests
 from Departamento import Departamento
 from Obra import Obra
 
+
+#Obtiene la lista de departamentos del museo con sus ids y nombres
 def api_departaments():
     departamentos = []
     url = "https://collectionapi.metmuseum.org/public/collection/v1/departments"
@@ -35,6 +37,7 @@ api_departaments()
 api_obras()
 """
 
+#busca las obras por departamento, devuelve una lista de ids de obras
 def api_buscar_obras_por_departmento(id):
     r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
     data = requests.get(r)
@@ -45,6 +48,7 @@ def api_buscar_obras_por_departmento(id):
 
     return listado_id
 
+#busca las obras por id, devuelve un objeto Obra
 def api_buscar_obras_por_id(id):
     r="https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(id)
     data = requests.get(r)

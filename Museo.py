@@ -17,19 +17,23 @@ class Museo :
             menu = input ("Bienvenido al Catálogo del Museo metropolitano de Arte, por favor elija una opcion: \n 1-Ver lista de obras por Departamento \n 2-Ver lista de obras por Nacionalidad del autor \n 3-Ver lista de obras por nombre del autor \n 4-Finalizar programa \n>")
 
             if menu == "1":
+
+                #Muestra los departamentos de forma enumerada
                 contador = 1
                 for departamento in self.departamentos:
                     print(f"{contador}. {departamento.nombre_departamento} (ID: {departamento.id_departamento})")
                     contador += 1
                 
+                #Pide al usuario que seleccione un departamento
                 opcion = input("Seleccione el numero del departamento que desea consultar: ")
                 while not opcion.isdigit() or (int(opcion) < 1 or int(opcion) > len(self.departamentos)):
                     opcion = input("Error. Por favor, ingrese un número válido: ")
 
-
+                #Busca las obras del departamento seleccionado
                 id = self.departamentos[int(opcion)-1].id_departamento
                 listado_id = api_buscar_obras_por_departmento(id)
 
+                #Muestra las obras del departamento seleccionado
                 for id in listado_id:
                     obra = api_buscar_obras_por_id(id)
                     if obra != None:
