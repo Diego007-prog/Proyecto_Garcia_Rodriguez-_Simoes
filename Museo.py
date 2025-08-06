@@ -2,7 +2,7 @@
 from Obra import Obra
 from Departamento import Departamento
 from Artista import Artista
-from api import api_buscar_obras_por_departmento
+from api import api_buscar_obras_por_departmento, api_buscar_obras_por_nombre
 
 
 
@@ -44,10 +44,12 @@ class Museo :
                 
                 nacionalidad_seleccionada = nacionalidades[int(opcion) - 1]
 
-                
+
 
             elif menu == "3":
-                pass
+                
+                nombre = input("Ingrese el nombre del autor que desea consultar: ")
+                api_buscar_obras_por_nombre(nombre)
 
             else:
                 break

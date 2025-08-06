@@ -43,3 +43,14 @@ def api_buscar_obras_por_departmento(id):
     print(listado_id)
 
     return listado_id
+
+
+def api_buscar_obras_por_nombre(nombre):
+    nombre_codificado = nombre.replace(" ", "%20").lower()
+    #url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?q={nombre_codificado}&artistOrCulture=true&hasImages=true"
+    url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q={nombre_codificado}"
+    data = requests.get(url)
+    listado_id = data.json()
+    print(listado_id)
+    return listado_id
+
