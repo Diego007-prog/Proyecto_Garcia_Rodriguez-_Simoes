@@ -4,6 +4,8 @@ from Departamento import Departamento
 from Obra import Obra
 
 
+
+
 #Obtiene la lista de departamentos del museo con sus ids y nombres
 def api_departaments():
     departamentos = []

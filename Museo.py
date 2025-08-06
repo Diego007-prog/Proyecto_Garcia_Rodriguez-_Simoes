@@ -4,6 +4,9 @@ from Departamento import Departamento
 from Artista import Artista
 from api import api_buscar_obras_por_departmento, api_buscar_obras_por_nombre, api_buscar_obras_por_id
 
+from descargar_imagen import guardar_imagen_desde_url
+from PIL import Image
+
 
 
 class Museo :
@@ -52,8 +55,8 @@ class Museo :
 
 
                     for obra in obras:
-                        if obra.id_obra == id_obra:
-                            pass
+                        if int(obra.id_obra) == int(id_obra):
+                            self.descargar_imgen(obra)
 
             elif menu == "2":
                 
@@ -87,11 +90,28 @@ class Museo :
 
                     for obra in obras:
                         if obra.id_obra == id_obra:
-                            pass
+                            self.descargar_imgen(obra)
 
             else:
                 break
 
+    def descargar_imgen(self, obra):
+                
+        # URL de la API
+        api_url = obra.imagen_obra
+        # Nombre deseado para el archivo (sin extensión, ya que se determinará automáticamente)
+        nombre_archivo_destino = obra.titulo
+
+        # Llamar a la función para guardar la imagen
+        nombre_archivo_guardado = guardar_imagen_desde_url(api_url, nombre_archivo_destino)
+
+        # Mostrar la imagen si se guardó correctamente
+        if nombre_archivo_guardado:
+            try:
+                img = Image.open(nombre_archivo_guardado)
+                img.show()
+            except IOError as e:
+                print(f"Error al abrir la imagen: {e}")
 
     def iniciar_objetos(self):
         pass    
