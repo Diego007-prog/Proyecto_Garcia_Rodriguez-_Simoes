@@ -74,6 +74,8 @@ def api_buscar_obras_por_nombre(nombre):
     data = requests.get(url)
     listado_id = data.json()["objectIDs"]
     
+    obras = []
+
     #si no se encuentran obras, devuelve None y lo indica
     if listado_id is None:
         print("No se encontraron obras para el nombre ingresado.")
@@ -82,5 +84,8 @@ def api_buscar_obras_por_nombre(nombre):
             obra = api_buscar_obras_por_id(id)
             if obra != None:
                 obra.show()
+                obras.append(obra)
+
+    return obras
         
     

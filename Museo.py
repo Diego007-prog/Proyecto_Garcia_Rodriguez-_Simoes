@@ -33,12 +33,27 @@ class Museo :
                 id = self.departamentos[int(opcion)-1].id_departamento
                 listado_id = api_buscar_obras_por_departmento(id)
 
+                obras = []
                 #Muestra las obras del departamento seleccionado
                 for id in listado_id:
                     obra = api_buscar_obras_por_id(id)
                     if obra != None:
-                        obra.show()
+                        obras.append(obra)
 
+                for obra in obras:
+                    obra.show()
+
+                #selecciona una obra para descargar la imagen
+                opcion = input("¿Desea ver la imagen de una obra? (s/n): ")
+                if opcion.lower() == "s":
+                    id_obra = input("Ingrese el ID de la obra: ")
+                    while not id_obra.isdigit():
+                        id_obra = input("Error. Por favor, ingrese un ID valido, recuerde que debe ser un numero: ")
+
+
+                    for obra in obras:
+                        if obra.id_obra == id_obra:
+                            pass
 
             elif menu == "2":
                 
@@ -59,7 +74,20 @@ class Museo :
                 nombre = input("Ingrese el nombre del autor que desea consultar: ")
 
                 #busca las obras del autor ingresado
-                api_buscar_obras_por_nombre(nombre)
+                obras = api_buscar_obras_por_nombre(nombre)
+
+
+                #selecciona una obra para descargar la imagen
+                opcion = input("¿Desea ver la imagen de una obra? (s/n): ")
+                if opcion.lower() == "s":
+                    id_obra = input("Ingrese el ID de la obra: ")
+                    while not id_obra.isdigit():
+                        id_obra = input("Error. Por favor, ingrese un ID valido, recuerde que debe ser un numero: ")
+
+
+                    for obra in obras:
+                        if obra.id_obra == id_obra:
+                            pass
 
             else:
                 break
