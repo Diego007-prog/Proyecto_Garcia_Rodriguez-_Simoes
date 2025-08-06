@@ -4,7 +4,7 @@ from Departamento import Departamento
 from Obra import Obra
 
 
-
+######"""Funcion usadas hasta el momento"""
 
 #Obtiene la lista de departamentos del museo con sus ids y nombres
 def api_departaments():
@@ -20,35 +20,6 @@ def api_departaments():
         departamentos.append(departamento)
 
     return departamentos
-
-
-def api_obras():
-    obras = []
-    url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
-
-    data = requests.get(url)
-
-    listado_id = data.json()
-
-    for k in listado_id["objectIDs"]:
-        url2 = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(k)
-        #print(url2)
-
-"""
-api_departaments()
-api_obras()
-"""
-
-#busca las obras por departamento, devuelve una lista de ids de obras
-def api_buscar_obras_por_departmento(id):
-    r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
-    data = requests.get(r)
-
-    listado_id = data.json()["objectIDs"]
-
-    #print(listado_id)
-
-    return listado_id
 
 #busca las obras por id, devuelve un objeto Obra
 def api_buscar_obras_por_id(id):
@@ -67,6 +38,16 @@ def api_buscar_obras_por_id(id):
         obra = Obra(obra["objectID"], obra["title"], obra["artistDisplayName"], obra["artistNationality"], obra["artistBeginDate"], obra["artistEndDate"], obra["classification"], obra["objectDate"], obra["primaryImageSmall"])
         return obra
 
+#busca las obras por departamento, devuelve una lista de ids de obras
+def api_buscar_obras_por_departmento(id):
+    r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
+    data = requests.get(r)
+
+    listado_id = data.json()["objectIDs"]
+
+    #print(listado_id)
+
+    return listado_id
 
 #busca las obras por nombre del artista, y muestra las obras encontradas
 def api_buscar_obras_por_nombre(nombre):
@@ -89,5 +70,35 @@ def api_buscar_obras_por_nombre(nombre):
                 obras.append(obra)
 
     return obras
+
+
+######"""Fin funcion usadas hasta el momento"""
+
+
+
+
+
+
+
+def api_obras():
+    obras = []
+    url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+
+    data = requests.get(url)
+
+    listado_id = data.json()
+
+    for k in listado_id["objectIDs"]:
+        url2 = "https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(k)
+        #print(url2)
+
+"""
+api_departaments()
+api_obras()
+"""
+
+
+
+
         
     
