@@ -89,7 +89,7 @@ class Museo :
 
 
                     for obra in obras:
-                        if obra.id_obra == id_obra:
+                        if int(obra.id_obra) == int(id_obra):
                             self.descargar_imgen(obra)
 
             else:
