@@ -6,8 +6,16 @@ from Obra import Obra
 
 ######"""Funcion usadas hasta el momento"""
 
-#Obtiene la lista de departamentos del museo con sus ids y nombres
+
 def api_departaments():
+
+    """
+    Obtiene la lista de departamentos del museo desde la API.
+
+    Retorna:
+        list: Una lista de objetos Departamento.
+    """
+
     departamentos = []
     url = "https://collectionapi.metmuseum.org/public/collection/v1/departments"
 
@@ -21,8 +29,18 @@ def api_departaments():
 
     return departamentos
 
-#busca las obras por id, devuelve un objeto Obra
+
 def api_buscar_obras_por_id(id):
+
+    """
+    Busca una obra por su ID en la API.
+
+    Argumentos:
+        id: El ID de la obra a buscar.
+
+    Retorna:
+        Obra: Un objeto Obra si se encuentra la obra, de lo contrario None.
+    """
     r="https://collectionapi.metmuseum.org/public/collection/v1/objects/" + str(id)
     data = requests.get(r)
 
@@ -38,8 +56,19 @@ def api_buscar_obras_por_id(id):
         obra = Obra(obra["objectID"], obra["title"], obra["artistDisplayName"], obra["artistNationality"], obra["artistBeginDate"], obra["artistEndDate"], obra["classification"], obra["objectDate"], obra["primaryImageSmall"])
         return obra
 
-#busca las obras por departamento, devuelve una lista de ids de obras
+
 def api_buscar_obras_por_departmento(id):
+
+    """
+    Busca las obras de un departamento específico
+
+    Argumentos:
+        id: El ID del departamento.
+
+    Retorna:
+        list: Una lista de IDs de obras.
+    """
+
     r="https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=" + str(id) + "&q=*&hasImages=true"
     data = requests.get(r)
 
@@ -49,8 +78,19 @@ def api_buscar_obras_por_departmento(id):
 
     return listado_id
 
-#busca las obras por nombre del artista, y muestra las obras encontradas
+
 def api_buscar_obras_por_nombre(nombre):
+
+    """
+    Busca obras por el nombre de un artista.
+
+    Argumentos:
+        nombre: El nombre del artista a buscar.
+
+    Retorna:
+        list: Una lista de objetos Obra que coinciden con la búsqueda.
+    """
+
     nombre_codificado = nombre.replace(" ", "%20").lower()
     #url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?q={nombre_codificado}&artistOrCulture=true&hasImages=true"
     url = f"https://collectionapi.metmuseum.org/public/collection/v1/search?artistOrCulture=true&q={nombre_codificado}"
@@ -73,8 +113,18 @@ def api_buscar_obras_por_nombre(nombre):
 
 
 
-#Busca todas las obras del museo y devuelve una lista de objetos Obra
+
 def api_obras():
+
+    """
+    Busca todas las obras del museo y devuelve una lista de objetos de tipo Obra.
+    
+    Solo devuelve las primeras 100 obras para evitar tiempos de espera prolongados.
+
+    Retorna:
+        list: Una lista de objetos Obra.
+    """
+
     obras = []
     url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
 

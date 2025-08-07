@@ -31,6 +31,13 @@ class Museo :
                 break
 
     def descargar_imgen(self, obra):
+
+        """
+        Descarga la imagen de una obra y la muestra.
+
+        Argumento:
+            obra (objeto de tipo Obra): El objeto Obra cuya imagen se va a descargar.
+        """
                 
         # URL de la API
         api_url = obra.imagen_obra
@@ -49,6 +56,14 @@ class Museo :
                 print(f"Error al abrir la imagen: {e}")
 
     def opcion_1(self):
+
+        """
+        Maneja la opción de ver obras por departamento.
+
+        Permite al usuario seleccionar un departamento de una lista para ver las obras
+        relacionadas y opcionalmente descargar la imagen de una obra específica.
+        """
+
         #Muestra los departamentos de forma enumerada
         contador = 1
         for departamento in self.departamentos:
@@ -87,6 +102,17 @@ class Museo :
                     self.descargar_imgen(obra)
 
     def opcion_2(self, obras):
+
+        """
+        Maneja la opción de ver obras por nacionalidad del artista.
+
+        Muestra una lista de nacionalidades, pide al usuario que seleccione una,
+        filtra las obras por esa nacionalidad y opcionalmente permite descargar
+        la imagen de una obra.
+
+        Argumento:
+            Lista de obras: Una lista de objetos Obra para filtrar.
+        """
         
         #muestra las nacionalidades de los artistas de las obras
         nacionalidades = ["Afghan", "Albanian", "Algerian", "American", "Andorran", "Angolan", "Anguillan", "Argentine", "Armenian", "Australian", "Austrian", "Azerbaijani", "Bahamian", "Bahraini", "Bangladeshi", "Barbadian", "Belarusian", "Belgian", "Belizean", "Beninese", "Bermudian", "Bhutanese", "Bolivian", "Botswanan", "Brazilian", "British", "British Virgin Islander", "Bruneian", "Bulgarian", "Burkinan", "Burmese", "Burundian", "Cambodian", "Cameroonian", "Canadian", "Cape Verdean", "Cayman Islander", "Central African", "Chadian", "Chilean", "Chinese", "Citizen of Antigua and Barbuda", "Citizen of Bosnia and Herzegovina", "Citizen of Guinea-Bissau", "Citizen of Kiribati", "Citizen of Seychelles", "Citizen of the Dominican Republic", "Citizen of Vanuatu", "Colombian", "Comoran", "Congolese (Congo)", "Congolese (DRC)", "Cook Islander", "Costa Rican", "Croatian", "Cuban", "Cymraes", "Cymro", "Cypriot", "Czech", "Danish", "Djiboutian", "Dominican", "Dutch", "East Timorese", "Ecuadorean", "Egyptian", "Emirati", "English", "Equatorial Guinean", "Eritrean", "Estonian", "Ethiopian", "Faroese", "Fijian", "Filipino", "Finnish", "French", "Gabonese", "Gambian", "Georgian", "German", "Ghanaian", "Gibraltarian", "Greek", "Greenlandic", "Grenadian", "Guamanian", "Guatemalan", "Guinean", "Guyanese", "Haitian", "Honduran", "Hong Konger", "Hungarian", "Icelandic", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Ivorian", "Jamaican", "Japanese", "Jordanian", "Kazakh", "Kenyan", "Kittitian", "Kosovan", "Kuwaiti", "Kyrgyz", "Lao", "Latvian", "Lebanese", "Liberian", "Libyan", "Liechtenstein citizen", "Lithuanian", "Luxembourger", "Macanese", "Macedonian", "Malagasy", "Malawian", "Malaysian", "Maldivian", "Malian", "Maltese", "Marshallese", "Martiniquais", "Mauritanian", "Mauritian", "Mexican", "Micronesian", "Moldovan", "Monegasque", "Mongolian", "Montenegrin", "Montserratian", "Moroccan", "Mosotho", "Mozambican", "Namibian", "Nauruan", "Nepalese", "New Zealander", "Nicaraguan", "Nigerian", "Nigerien", "Niuean", "North Korean", "Northern Irish", "Norwegian", "Omani", "Pakistani", "Palauan", "Palestinian", "Panamanian", "Papua New Guinean", "Paraguayan", "Peruvian", "Pitcairn Islander", "Polish", "Portuguese", "Prydeinig", "Puerto Rican", "Qatari", "Romanian", "Russian", "Rwandan", "Salvadorean", "Sammarinese", "Samoan", "Sao Tomean", "Saudi Arabian", "Scottish", "Senegalese", "Serbian", "Sierra Leonean", "Singaporean", "Slovak", "Slovenian", "Solomon Islander", "Somali", "South African", "South Korean", "South Sudanese", "Spanish", "Sri Lankan", "St Helenian", "St Lucian", "Stateless", "Sudanese", "Surinamese", "Swazi", "Swedish", "Swiss", "Syrian", "Taiwanese", "Tajik", "Tanzanian", "Thai", "Togolese", "Tongan", "Trinidadian", "Tristanian", "Tunisian", "Turkish", "Turkmen", "Turks and Caicos Islander", "Tuvaluan", "Ugandan", "Ukrainian", "Uruguayan", "Uzbek", "Vatican citizen", "Venezuelan", "Vietnamese", "Vincentian", "Wallisian", "Welsh", "Yemeni", "Zambian", "Zimbabwean"]
@@ -118,6 +144,15 @@ class Museo :
 
 
     def opcion_3(self):
+
+        """
+        Maneja la opción de buscar obras por nombre de artista.
+
+        Pide al usuario que ingrese el nombre de un artista, busca las obras
+        relacionadas a través de la API y opcionalmente permite descargar la
+        imagen de una obra.
+        """
+        
         #pide al usuario que ingrese el nombre del autor
         nombre = input("Ingrese el nombre del autor que desea consultar: ")
 

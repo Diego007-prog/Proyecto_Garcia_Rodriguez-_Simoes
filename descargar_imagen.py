@@ -3,6 +3,18 @@ import requests
 def guardar_imagen_desde_url(url, nombre_archivo):
     """
     Descarga una imagen desde una URL y la guarda en un archivo.
+
+    Esta función descarga el contenido de la URL, determina la extensión
+    del archivo a partir del tipo de contenido (Content-Type) de la respuesta,
+    y guarda la imagen en un archivo local.
+
+    Argumento:
+        url: La URL de la imagen a descargar.
+        nombre_archivo: El nombre base para el archivo, sin la extensión.
+
+    Retorna:
+        El nombre final del archivo guardado si la descarga es exitosa,
+             de lo contrario None.
     """
     try:
         response = requests.get(url, stream=True)
